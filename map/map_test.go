@@ -9,6 +9,22 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
+func TestMapMap(t *testing.T) {
+	var m = make(map[string]map[string]int)
+	m["foo"] = make(map[string]int)
+	m["foo"]["key1"] = 1
+	x := m["foo"]
+	// x before: map[key1:1]
+	t.Logf("x before: %+v", x)
+
+	m["foo"]["key1"] = 2
+	m["foo"]["key2"] = 3
+
+	t.Logf("m: %+v", m)
+	// x after: map[key1:2 key2:3]
+	t.Logf("x after: %+v", x)
+}
+
 func TestSetMapMember(t *testing.T) {
 	var m = map[string]struct{ x, y int }{
 		"foo": {2, 3},
@@ -36,7 +52,7 @@ func TestSetMapMember(t *testing.T) {
 
 type Person struct {
 	Name string `json:"name"`
-	Age int `json:"age"`
+	Age  int    `json:"age"`
 }
 
 var (
@@ -61,10 +77,10 @@ func Transfer(a, b interface{}) error {
 	return nil
 }
 
-func TestMap(t *testing.T)  {
+func TestMap(t *testing.T) {
 	p := Person{
 		Name: "harvey",
-		Age: 30,
+		Age:  30,
 	}
 	target := map[string]interface{}{}
 	target1 := make(map[string]interface{})
