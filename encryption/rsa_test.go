@@ -19,7 +19,7 @@ func TestRsaSig(t *testing.T) {
 	}
 	publicKey := &privateKey.PublicKey
 
-	// RSA 加密
+	// RSA 公钥加密
 	plaintext := []byte("hello, world")
 	ciphertext, err := rsa.EncryptOAEP(sha256.New(), rand.Reader, publicKey, plaintext, nil)
 	if err != nil {
@@ -27,7 +27,7 @@ func TestRsaSig(t *testing.T) {
 		return
 	}
 
-	// RSA 解密
+	// RSA 私钥解密
 	decryptedText, err := rsa.DecryptOAEP(sha256.New(), rand.Reader, privateKey, ciphertext, nil)
 	if err != nil {
 		fmt.Println(err)
